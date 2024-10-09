@@ -29,10 +29,10 @@ export default function Navbar() {
       <div className="flex justify-around items-center p-5">
         <h1 className="hidden md:flex">FAUZANSHOP</h1>
         <div className="md:flex gap-6 hidden">
-          <Link href="#">Home</Link>
-          <Link href="#">About Us</Link>
+          <Link href="/">Home</Link>
+          <Link href="/about">About Us</Link>
           <Link href="/products">Products</Link>
-          <Link href="#">Contacts</Link>
+          <Link href="/contacts">Contacts</Link>
         </div>
         <div
           className={`flex flex-col duration-200 ${
