@@ -43,10 +43,10 @@ export default function Navbar() {
             <IoCloseOutline className="text-2xl hover:cursor-pointer" onClick={() => setModal(false)} />
           </div>
           <div className="flex flex-col gap-8">
-            <Link href="#">Home</Link>
-            <Link href="#">About Us</Link>
+            <Link href="/home">Home</Link>
+            <Link href="/about">About Us</Link>
             <Link href="/products">Products</Link>
-            <Link href="#">Contacts</Link>
+            <Link href="/contacts">Contacts</Link>
           </div>
         </div>
         <div className="flex text-2xl gap-3">
