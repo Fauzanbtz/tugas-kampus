@@ -69,8 +69,8 @@ export default function TopSell() {
       <div className="w-2/3">
         <Image src={Imagehp} alt="image" />
       </div>
-      <div>
-        <div className="flex justify-between items-center py-10">
+      <div className="flex flex-col justify-center items-center md:items-stretch">
+        <div className="flex flex-col md:flex-row justify-between items-center py-10">
           <h1 className="font-bold text-2xl">MACC WEEKLY DISCOUNT</h1>
           <Button className="bg-gray-500 font-light">VIEW ALL</Button>
         </div>
