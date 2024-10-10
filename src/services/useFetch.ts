@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react";
 type data = {
   id: number,
-  title: string,
+  name: string,
   description: string,
-  category: string,
   price: number,
-  images: string
+  image: string
 }
 
 const useFetch = () => {
@@ -17,9 +16,9 @@ const useFetch = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://dummyjson.com/products");
+        const res = await fetch("http://localhost:3000/api/products");
         const data = await res.json();
-        const products = data.products
+        const products = data
         setDataFetch(products);
       } catch {
         setError("data error");

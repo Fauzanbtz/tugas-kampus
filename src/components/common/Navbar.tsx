@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { CiShoppingCart, CiUser } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
+
 import Link from "next/link";
 
 export default function Navbar() {
@@ -27,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       <div className="flex justify-around items-center p-5">
-        <h1 className="hidden md:flex">FAUZANSHOP</h1>
+        <h1 className="hidden md:flex text-primary font-bold text-xl">Aquapure</h1>
         <div className="md:flex gap-6 hidden">
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
@@ -39,7 +40,7 @@ export default function Navbar() {
             modal ? "left-0" : "-left-full"
           } top-0 absolute bg-white p-10 h-full w-2/3`}>
           <div className="flex justify-between ">
-            <h1 className="pb-10">FAUZANSHOP</h1>
+            <h1 className="pb-10 text-primary font-bold text-xl">Aquapure</h1>
             <IoCloseOutline className="text-2xl hover:cursor-pointer" onClick={() => setModal(false)} />
           </div>
           <div className="flex flex-col gap-8">

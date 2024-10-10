@@ -7,24 +7,22 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [islogin, setIslogin] = useState("")
+  const [islogin, setIslogin] = useState("");
 
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    fetch("https://dummyjson.com/auth/login", {
+    fetch("http://localhost:3000/api/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: username,
+        email: email,
         password: password,
-        expiresInMins: 60,
       }),
     })
       .then((res) => res.json())
@@ -33,18 +31,19 @@ export default function Login() {
           // Tangani berbagai pesan kesalahan
           if (data.message === "Username and password required") {
             console.log("Username dan password diperlukan.");
-            setError("Username dan password diperlukan.")
-          } else if (data.message === "Invalid credentials") {
+            setError("Username dan password diperlukan.");
+          } else if (data.message === "Invalid email or password") {
             console.log("Kredensial tidak valid.");
-            setError("password atau username salah.")
-          } else if (data.accessToken) {
+            setError("password atau email salah.");
+          } else if (data.token) {
             // Simpan token jika respons valid
-            document.cookie = `token=${data.accessToken}; path=/; max-age=3600; secure; SameSite=Lax`;
-            console.log("Token saved:", data);
+            document.cookie = `token=${data.token}; path=/; max-age=3600; secure; SameSite=Lax`;
+            console.log("Token saved:", data.token);
             setTimeout(() => {
-              router.push("/")
+              router.push("/");
             }, 3000);
-            setIslogin("LOGIN BERHASIL")
+            setError("");
+            setIslogin("LOGIN BERHASIL");
           } else {
             console.log("Ada yang bermasalah:", data.message);
           }
@@ -61,12 +60,12 @@ export default function Login() {
         <h1 className="font-bold text-center">LOGIN</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div>
-            <label htmlFor="username">USERNAME</label>
+            <label htmlFor="email">USERNAME</label>
             <Input
-              type="text"
-              placeholder="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -82,8 +81,18 @@ export default function Login() {
             SUBMIT
           </Button>
         </form>
-        {islogin ? <p className="bg-green-400 text-center p-2 rounded-xl my-6">{islogin}</p> : ""}
-        {error ? <p className="bg-red-600 text-center p-2 rounded-xl my-6">{error}</p> : <p></p>}
+        {islogin ? (
+          <p className="bg-green-400 text-center p-2 rounded-xl my-6">
+            {islogin}
+          </p>
+        ) : (
+          ""
+        )}
+        {error ? (
+          <p className="bg-red-600 text-center p-2 rounded-xl my-6">{error}</p>
+        ) : (
+          <p></p>
+        )}
         <p>
           dont have account ?{" "}
           <Link href="/register" className="text-blue-700">
