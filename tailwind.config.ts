@@ -29,7 +29,7 @@ const config: Config = {
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			muted: {
-  				DEFAULT: '##f2b43b',
+  				DEFAULT: '#F2B43B',
   				foreground: 'hsl(var(--muted-foreground))'
   			},
   			accent: {

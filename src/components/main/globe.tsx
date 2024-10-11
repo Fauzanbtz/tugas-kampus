@@ -412,8 +412,9 @@ export default function GlobeDemo() {
           className="div"
         >
           <h2 className="text-center text-xl md:text-4xl font-bold text-primary dark:text-white">
-            We sell corkcicle worldwide
+          we sell corkcicle all over the world
           </h2>
+          <p className="text-center font-thin">find our outlets anywhere and anytime</p>
         </motion.div>
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
         <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">

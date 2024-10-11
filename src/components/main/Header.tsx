@@ -48,10 +48,9 @@ export default function Header() {
     <>
       <div className="md:h-screen bg-secondary flex flex-col md:flex-row justify-around  items-center gap-6">
         <div className="md:w-1/2 flex flex-col items-center md:items-start  gap-6">
-          <TypingAnimation
-            className="text-primary font-bold text-6xl text-center md:text-left"
-            text="Have Colder.Hotter.Longer."
-          />
+          <h1 className="text-primary font-bold text-6xl text-center md:text-left">
+            Have Colder.Hotter.Longer.
+          </h1>
 
           <p className="text-[#707070]">
             Which is the same as saying through shrinking from toil and pain.
