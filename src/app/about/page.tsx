@@ -1,11 +1,12 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Navbar from "@/components/common/Navbar";
+import Footer from "@/components/common/Footer";
 
 export default function Component() {
   return (
     <div className="w-full">
       <Navbar />
-      <section className="bg-muted py-12 md:py-24">
+      <section className="bg-gray-300 py-12 md:py-24">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
             <h1 className="text-3xl md:text-4xl font-bold">Tentang Kami</h1>
@@ -123,7 +124,7 @@ export default function Component() {
           </div>
         </div>
       </section>
-      <section className="bg-muted py-12 md:py-24">
+      <section className="bg-gray-300 py-12 md:py-24">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
             <h2 className="text-2xl md:text-3xl font-bold">Proses Bisnis</h2>
@@ -207,6 +208,7 @@ export default function Component() {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

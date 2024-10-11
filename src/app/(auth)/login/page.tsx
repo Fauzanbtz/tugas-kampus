@@ -60,7 +60,7 @@ export default function Login() {
         <h1 className="font-bold text-center">LOGIN</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div>
-            <label htmlFor="email">USERNAME</label>
+            <label htmlFor="email">Email</label>
             <Input
               type="email"
               placeholder="email"
@@ -69,7 +69,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="password">Email</label>
             <Input
               type="password"
               placeholder="********"

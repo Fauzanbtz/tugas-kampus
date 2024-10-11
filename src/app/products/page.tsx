@@ -14,7 +14,7 @@ export default function Products() {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-wrap justify-center items-center gap-6 pt-24">
+      <div className="flex flex-wrap justify-center items-center gap-6 py-24">
 
         {loading
           ? Array.from({ length: 10 }).map((_, index) => (

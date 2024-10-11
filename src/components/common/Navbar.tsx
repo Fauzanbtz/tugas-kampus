@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <>
       <div className="flex justify-around items-center p-5">
-        <h1 className="hidden md:flex text-primary font-bold text-xl">Aquapure</h1>
+        <h1 className="hidden md:flex text-primary font-bold text-xl">corkcicle.</h1>
         <div className="md:flex gap-6 hidden">
           <Link href="/">Home</Link>
           <Link href="/about">About Us</Link>
@@ -40,11 +40,11 @@ export default function Navbar() {
             modal ? "left-0" : "-left-full"
           } top-0 absolute bg-white p-10 h-full w-2/3`}>
           <div className="flex justify-between ">
-            <h1 className="pb-10 text-primary font-bold text-xl">Aquapure</h1>
+            <h1 className="pb-10 text-primary font-bold text-xl">corkcicle.</h1>
             <IoCloseOutline className="text-2xl hover:cursor-pointer" onClick={() => setModal(false)} />
           </div>
           <div className="flex flex-col gap-8">
-            <Link href="/home">Home</Link>
+            <Link href="/">Home</Link>
             <Link href="/about">About Us</Link>
             <Link href="/products">Products</Link>
             <Link href="/contacts">Contacts</Link>

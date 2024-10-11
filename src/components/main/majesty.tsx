@@ -27,7 +27,7 @@ export default function Majesty() {
         </div>
         <Button className="w-fit px-10 bg-muted text-primary">$10.000USD View Detail</Button>
       </div>
-      <div>
+      <div className="pt-10 md:pt-0">
         <Image
           src="https://cdn.prod.website-files.com/6306108e26f4bb1bc5ad6e3d/6310a72a620367ef24333ae5_about-02.png"
           alt=""

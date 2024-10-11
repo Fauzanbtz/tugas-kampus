@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <div className="">
+      <div className="font-serif">
         <Header />
         <ProductsShow/>
         <Testimonial/>
