@@ -47,9 +47,9 @@ export default function Header() {
   return (
     <>
       <div className="md:h-screen bg-secondary flex flex-col md:flex-row justify-around  items-center gap-6">
-        <div className="md:w-1/2 flex flex-col items-center md:items-start  gap-6">
-          <h1 className="text-primary font-bold text-6xl text-center md:text-left">
-            Have Colder.Hotter.Longer.
+        <div className="md:w-1/2 flex flex-col px-10 md:items-start  gap-6 pt-10">
+          <h1 className="text-primary font-bold text-3xl md:text-6xl  md:text-left">
+            Have Colder.<br/>Hotter.Longer.
           </h1>
 
           <p className="text-[#707070]">

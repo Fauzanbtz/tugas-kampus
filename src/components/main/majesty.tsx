@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 
 export default function Majesty() {
   return (
-    <div className="md:h-screen flex flex-col md:flex-row justify-around items-center">
+    <div className="md:h-screen flex flex-col md:flex-row justify-around items-center py-10 px-5">
       <div className="md:w-1/2 flex flex-col gap-10">
         <div className="text-primary flex flex-col gap-8">
           <h1 className="text-primary text-6xl font-bold">
