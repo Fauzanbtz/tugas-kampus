@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import useFetch from "@/services/useFetch";
 import Navbar from "@/components/common/Navbar";
 import Image from "next/image";
@@ -9,13 +8,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
 export default function Products() {
-  const { datafetch, loading } = useFetch();
+  const { datafetch, loading} = useFetch();
+
 
   return (
     <div>
       <Navbar />
       <div className="flex flex-wrap justify-center items-center gap-6 pt-24">
-        {/* Tampilkan Skeleton ketika loading */}
+
         {loading
           ? Array.from({ length: 10 }).map((_, index) => (
               <div key={index} className="text-center">
