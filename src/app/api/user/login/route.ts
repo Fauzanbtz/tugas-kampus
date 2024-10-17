@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Buat token JWT
-    const token = await signToken({ id: user.id, email: user.email });
+    const token = await signToken({ id: user.id});
 
     return NextResponse.json(
       { message: "Login successful", token },

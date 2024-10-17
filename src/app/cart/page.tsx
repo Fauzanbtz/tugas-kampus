@@ -1,97 +1,86 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import Image from "next/image";
+import { jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
+
+interface CartItem {
+  id: number;
+  quantity: number;
+  product: {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+  };
+}
 
 const ShoppingBag = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Masker",
-      price: 20.5,
-      quantity: 2,
-      color: "Blue",
-      size: "42",
-      image: "https://corkcicle.com/cdn/shop/files/2020CSB-04_900x.png?v=1725800633",
-    },
-    {
-      id: 2,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "https://corkcicle.com/cdn/shop/files/2020CSB-04_900x.png?v=1725800633",
-    } /* 
-    {
-      id: 3,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "../images/products/Product_img.png",
-    },
-    {
-      id: 4,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "../images/products/Product_img.png",
-    },
-    {
-      id: 5,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "../images/products/Product_img.png",
-    },
-    {
-      id: 6,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "../images/products/Product_img.png",
-    },
-    {
-      id: 7,
-      name: "Masker",
-      price: 30.5,
-      quantity: 1,
-      color: "Red",
-      size: "42",
-      image: "../images/products/Product_img.png",
-    }, */,
-  ]);
-
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const discount = 4.0;
 
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        // Retrieve the JWT token from localStorage (or wherever you store it)
+        const token = Cookies.get("token"); // Adjust as necessary
+        if (!token) {
+          console.error("No token found");
+          setLoading(false);
+          return;
+        }
+
+        // Decode the token
+        const decoded: any = jwtDecode(token);
+        const userId = decoded.id; // Adjust this based on your token structure
+
+        // Fetch cart items for the user
+        const response = await fetch(`/api/cart?userId=${userId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch cart items");
+        }
+
+        const data: CartItem[] = await response.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
   const updateQuantity = (id: number, newQuantity: number) => {
-    setItems(
-      items.map((item) =>
+    setItems((prevItems) =>
+      prevItems.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
       )
     );
-    {
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
-      );
-    }
   };
 
   const subtotal = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.product.price * item.quantity,
     0
   );
   const total = subtotal - discount;
+
+  if (loading) {
+    return (
+      <Fragment>
+        <Navbar />
+        <div className="py-4 px-10 bg-gray-100 min-h-screen text-center">
+          <h1 className="text-2xl font-bold mb-2">Loading...</h1>
+        </div>
+        <Footer />
+      </Fragment>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -100,21 +89,10 @@ const ShoppingBag = () => {
         <div className="py-4 px-10 bg-gray-100 min-h-screen">
           <h1 className="text-2xl font-bold mb-2">Shopping Bag</h1>
           <div className="bg-white p-8 rounded-3xl shadow text-center">
-            {/*          <img
-              src="/empty-cart.svg"
-              alt="Empty Cart"
-              className="mx-auto mb-4 w-48"
-            /> */}
             <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-4">
-              Looks like you havent added any items to your cart yet.
+              Looks like you haven't added any items to your cart yet.
             </p>
-            {/*        <Link
-              to="/products"
-              className="bg-blue-500 text-red-600 px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300"
-            >
-              Start Shopping
-            </Link> */}
           </div>
         </div>
         <Footer />
@@ -136,7 +114,7 @@ const ShoppingBag = () => {
           <div className="md:w-2/3 bg-white p-4 rounded-3xl shadow">
             <table className="md:table-fixed w-full">
               <thead>
-                <tr className="">
+                <tr>
                   <th className="text-center pb-2">Product</th>
                   <th className="text-center pb-2">Price</th>
                   <th className="text-center pb-2">Quantity</th>
@@ -149,26 +127,27 @@ const ShoppingBag = () => {
                     <td className="py-4">
                       <div className="flex justify-center items-center">
                         <Image
-                          src={item.image}
-                          alt={item.name}
+                          src={item.product.image}
+                          alt={item.product.name}
                           width={80}
                           height={80}
                           className="object-cover rounded"
                         />
                         <div className="ml-4">
-                          <h3 className="font-semibold">{item.name}</h3>
+                          <h3 className="font-semibold">{item.product.name}</h3>
                         </div>
                       </div>
                     </td>
-                    <td className="text-center">${item.price.toFixed(2)}</td>
+                    <td className="text-center">
+                      ${item.product.price.toFixed(2)}
+                    </td>
                     <td className="text-center">
                       <div className="flex items-center justify-center">
                         <button
                           onClick={() =>
                             updateQuantity(item.id, item.quantity - 1)
                           }
-                          className="border px-2 rounded-lg"
-                        >
+                          className="border px-2 rounded-lg">
                           -
                         </button>
                         <span className="mx-2">{item.quantity}</span>
@@ -176,14 +155,13 @@ const ShoppingBag = () => {
                           onClick={() =>
                             updateQuantity(item.id, item.quantity + 1)
                           }
-                          className="border px-2 rounded-lg"
-                        >
+                          className="border px-2 rounded-lg">
                           +
                         </button>
                       </div>
                     </td>
                     <td className="text-center font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ${(item.product.price * item.quantity).toFixed(2)}
                     </td>
                   </tr>
                 ))}
