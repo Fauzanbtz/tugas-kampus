@@ -6,11 +6,11 @@ export default function Component() {
   return (
     <div className="w-full">
       <Navbar />
-      <section className="bg-gray-300 py-12 md:py-24">
+      <section className="bg-primary text-white py-12 md:py-24">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
             <h1 className="text-3xl md:text-4xl font-bold">Tentang Kami</h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
+            <p className=" text-lg md:text-xl">
               Kami adalah perusahaan e-commerce yang berkomitmen untuk
               menyediakan pengalaman belanja online yang luar biasa bagi
               pelanggan kami. Dengan visi untuk menjadi platform terkemuka di
@@ -21,14 +21,14 @@ export default function Component() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <h2 className="text-2xl font-bold">Visi</h2>
-              <p className="text-muted-foreground">
+              <p className="">
                 Menjadi platform e-commerce terpercaya yang menyediakan
                 produk-produk berkualitas dan layanan terbaik bagi pelanggan.
               </p>
             </div>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold">Misi</h2>
-              <p className="text-muted-foreground">
+              <p className="">
                 Kami bertekad untuk terus berinovasi, memperluas jangkauan, dan
                 memberikan pengalaman belanja online yang menyenangkan bagi
                 semua orang.
@@ -47,7 +47,7 @@ export default function Component() {
                 memberikan yang terbaik bagi pelanggan kami.
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="flex flex-wrap justify-around">
               <div className="flex flex-col items-center gap-3">
                 <Avatar className="w-20 h-20">
                   <AvatarImage src="/placeholder-user.jpg" alt="John Doe" />
@@ -79,19 +79,6 @@ export default function Component() {
                 <div className="text-center">
                   <h3 className="font-semibold">Khanif</h3>
                   <p className="text-muted-foreground">PEMBANTU</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <Avatar className="w-20 h-20">
-                  <AvatarImage
-                    src="/placeholder-user.jpg"
-                    alt="Michael Johnson"
-                  />
-                  <AvatarFallback>NK</AvatarFallback>
-                </Avatar>
-                <div className="text-center">
-                  <h3 className="font-semibold">Niko</h3>
-                  <p className="text-muted-foreground">MAS GONDRONG</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">

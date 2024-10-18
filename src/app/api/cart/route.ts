@@ -94,3 +94,30 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     );
   }
 }
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const { id, quantity } = await req.json(); // Mengambil id dan quantity dari request body
+
+    if (!id || quantity == null) {
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Update quantity item di cart berdasarkan id
+    const updatedCart = await prisma.cart.update({
+      where: { id: id },
+      data: { quantity: quantity },
+    });
+
+    return NextResponse.json(updatedCart, { status: 200 });
+  } catch (error) {
+    console.error('Error updating cart item:', error);
+    return NextResponse.json(
+      { message: 'Something went wrong' },
+      { status: 500 }
+    );
+  }
+}

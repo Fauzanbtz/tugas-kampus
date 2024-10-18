@@ -5,7 +5,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import Image from "next/image";
 import { jwtDecode } from "jwt-decode";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 interface CartItem {
   id: number;
@@ -55,12 +55,41 @@ const ShoppingBag = () => {
     fetchCartItems();
   }, []);
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
-      )
-    );
+  // const updateQuantity = (id: number, newQuantity: number) => {
+  //   setItems((prevItems) =>
+  //     prevItems.map((item) =>
+  //       item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
+  //     )
+  //   );
+  // };
+
+  const updateCartQuantity = async (id: number, newQuantity: number) => {
+    try {
+      const response = await fetch(`/api/cart`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, quantity: newQuantity }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update cart item");
+      }
+
+      const updatedItem = await response.json();
+
+      // Update state dengan item yang sudah di-update
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === updatedItem.id
+            ? { ...item, quantity: updatedItem.quantity }
+            : item
+        )
+      );
+    } catch (error) {
+      console.error("Error updating cart item:", error);
+    }
   };
 
   const subtotal = items.reduce(
@@ -130,6 +159,7 @@ const ShoppingBag = () => {
                           alt={item.product.name}
                           width={80}
                           height={80}
+                          priority
                           className="object-cover rounded"
                         />
                         <div className="ml-4">
@@ -143,22 +173,26 @@ const ShoppingBag = () => {
                     <td className="text-center">
                       <div className="flex items-center justify-center">
                         <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
+                          onClick={() => {
+                            const newQuantity = item.quantity - 1;
+                            if (newQuantity >= 1) {
+                              updateCartQuantity(item.id, newQuantity);
+                            }
+                          }}
                           className="border px-2 rounded-lg">
                           -
                         </button>
                         <span className="mx-2">{item.quantity}</span>
                         <button
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
+                            updateCartQuantity(item.id, item.quantity + 1)
                           }
                           className="border px-2 rounded-lg">
                           +
                         </button>
                       </div>
                     </td>
+
                     <td className="text-center font-semibold">
                       ${(item.product.price * item.quantity).toFixed(2)}
                     </td>

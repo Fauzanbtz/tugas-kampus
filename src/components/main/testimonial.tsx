@@ -7,37 +7,31 @@ const reviews = [
     name: "Fauzan",
     username: "@FauzanGanteng",
     body: "gajah terbang keliatan apanya ?",
-    img: "https://avatar.vercel.sh/jack",
+    img: "https://i.pinimg.com/564x/42/1e/1d/421e1dd6be652135be6e6a3be6b53ddb.jpg",
   },
   {
     name: "Khanif",
     username: "@Khanifpah",
     body: "dua tiga tutup botol, ini website cakep betooool",
-    img: "https://avatar.vercel.sh/jill",
+    img: "https://i.pinimg.com/564x/8a/1a/35/8a1a35d348d66b122d202c556eb2da25.jpg",
   },
   {
     name: "Arkhan",
     username: "@ArkhanSadboy",
     body: "pliss dapet nilai tinggi",
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    name: "Niko",
-    username: "@NikohBuchin",
-    body: "infokan tukang cukur terdekat",
-    img: "https://avatar.vercel.sh/jane",
+    img: "https://i.pinimg.com/564x/bc/b8/b0/bcb8b04bf6708aebd78dfe9167991838.jpg",
   },
   {
     name: "Tami",
     username: "@Tamiah",
     body: "dimana ada event cosplay, disitu ada saya",
-    img: "https://avatar.vercel.sh/jenny",
+    img: "https://i.pinimg.com/564x/5b/59/44/5b594416a4a9834caeea04173c43a71d.jpg",
   },
   {
     name: "Abay",
     username: "@AbaySleeping",
     body: "ngantuk banget deh",
-    img: "https://avatar.vercel.sh/james",
+    img: "https://i.pinimg.com/enabled_hi/564x/16/08/a0/1608a083d706ad0673147101e70b22dd.jpg",
   },
 ];
 
@@ -65,7 +59,13 @@ const ReviewCard = ({
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}>
       <div className="flex flex-row items-center gap-2">
-        <Image className="rounded-full" width={32} height={32} alt="" src={img} />
+        <Image
+          className="rounded-full object-fill w-8 h-8"
+          width={32}
+          height={32}
+          alt=""
+          src={img}
+        />
         <div className="flex flex-col">
           <figcaption className="text-sm font-medium dark:text-white">
             {name}
