@@ -28,7 +28,6 @@ export default function Login() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          // Tangani berbagai pesan kesalahan
           if (data.message === "Username and password required") {
             console.log("Username dan password diperlukan.");
             setError("Username dan password diperlukan.");

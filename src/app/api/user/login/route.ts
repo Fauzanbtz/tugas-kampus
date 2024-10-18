@@ -1,13 +1,12 @@
-// /app/api/login/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { signToken } from "@/lib/jwt"; // Import fungsi JWT
+import { signToken } from "@/lib/jwt"; 
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    // Validasi input
     if (!email || !password) {
       return NextResponse.json(
         { message: "Email and password are required" },
@@ -15,7 +14,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Cari pengguna berdasarkan email
     const user = await prisma.user.findUnique({
       where: { email },
     });

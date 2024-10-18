@@ -9,26 +9,31 @@ import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster"
+import { useRouter } from "next/navigation";
 
 export default function Products() {
   const { datafetch, loading } = useFetch();
+  const router = useRouter();
+  
 
   // Fungsi untuk menambahkan produk ke keranjang
   const handleAddToCart = async (productId: any) => {
     const token = Cookies.get("token");
-    if (!token) {
-      console.error("Token tidak ditemukan, pastikan Anda sudah login.");
-      return;
-    }
 
     try {
+
+      if (!token) {
+        router.push("/login");
+        throw new Error("Token tidak ditemukan, pastikan Anda sudah login."); 
+      }
+
       const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Menambahkan token ke header
         },
-        body: JSON.stringify({ productId, quantity: 1 }), // Mengirimkan body yang benar
+        body: JSON.stringify({ productId, quantity: 1 }),
       });
 
       if (!response.ok) {
@@ -54,22 +59,19 @@ export default function Products() {
         {loading
           ? Array.from({ length: 10 }).map((_, index) => (
               <div key={index} className="text-center">
-                {/* Skeleton untuk gambar */}
                 <Skeleton className="h-[400px] w-[400px] rounded-xl" />
-                {/* Skeleton untuk nama produk */}
                 <Skeleton className="h-6 w-[300px] mt-4" />
-                {/* Skeleton untuk harga */}
                 <Skeleton className="h-6 w-[100px] mt-2" />
               </div>
             ))
           : datafetch.map((item) => (
               <div key={item.id} className="text-center">
-                {/* Tampilkan data produk jika sudah di-fetch */}
                 <Image
                   src={item.image}
                   alt={item.name}
                   width={400}
                   height={400}
+                  priority
                 />
                 <h1 className="font-serif text-2xl text-primary mt-4">
                   {item.name}

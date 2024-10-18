@@ -26,7 +26,6 @@ const ShoppingBag = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        // Retrieve the JWT token from localStorage (or wherever you store it)
         const token = Cookies.get("token"); // Adjust as necessary
         if (!token) {
           console.error("No token found");

@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
   try {
     const { name, password, email, role } = await req.json();
 
-    // Validasi input
     if (!name || !password || !email) {
       return NextResponse.json(
         { message: "All fields (name, email, password) are required" },
@@ -14,7 +13,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Periksa apakah email sudah digunakan
+
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -44,7 +43,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error creating user:", error);
 
-    // Jika error tidak dikenal, kembalikan respons 500
     return NextResponse.json(
       { message: "An unexpected error occurred. Please try again later." },
       { status: 500 }
