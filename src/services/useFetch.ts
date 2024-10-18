@@ -21,9 +21,9 @@ const useFetch = () => {
       console.log("Fetching data...");
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const res = await fetch("http://localhost:3000/api/products");
+        const res = await fetch("api/products");
 
         if (!res.ok) {
           throw new Error("Fetching from localhost failed");

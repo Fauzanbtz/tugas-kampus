@@ -168,7 +168,6 @@ const ShoppingBag = () => {
               </tbody>
             </table>
           </div>
-
           <div className="md:w-1/3">
             <div className="sticky top-4">
               <div className="bg-yellow-100 p-4 rounded-2xl shadow-xl">

@@ -1,21 +1,27 @@
-"use client"
+"use client";
 
-import React from "react";
-import { verifyToken } from "@/lib/jwt";
+import { useToast } from "@/hooks/use-toast"
+import { Button } from "@/components/ui/button"
+import { ToastAction } from "@/components/ui/toast"
+import { Toaster } from "@/components/ui/toaster"
 
 export default function Profile() {
+  const { toast } = useToast();
   return (
     <div>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault()
-          const data = await verifyToken(
-            "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNzI5MTc4MDA2fQ.LgXHEN6RT2pwXe9y_NJG9H31bnBxmWE4nfE49j1ZYXU"
-          );
-          console.log(data);
-        }}>
-        <button type="submit">test</button>
-      </form>
+       <Button
+      variant="outline"
+      onClick={() => {
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        })
+      }}
+    >
+      Show Toast
+    </Button>
+    <Toaster/>
     </div>
   );
 }
