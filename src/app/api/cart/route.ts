@@ -3,56 +3,59 @@ import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyToken } from "@/lib/jwt";
 
-export async function GET(req: Request) {
-    try {
-      // Optionally, retrieve the userId from query parameters or headers for better filtering
-      const { searchParams } = new URL(req.url);
-      const userId = searchParams.get("userId"); // Get userId from query parameters
-  
-      if (!userId) {
-        return NextResponse.json(
-          { message: "User ID is required" },
-          { status: 400 }
-        );
-      }
-  
-      // Fetch cart items for the specified user
-      const cartItems = await prisma.cart.findMany({
-        where: { userId: Number(userId) }, // Adjust this based on your schema
-        include: {
-          product: true, // Include product details if you have a relation
-        },
-      });
-  
-      return NextResponse.json(cartItems, { status: 200 });
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
+// Handler untuk GET request (ambil item dari cart)
+export async function GET(req: Request): Promise<NextResponse> {
+  try {
+    // Ambil userId dari query parameters
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
+
+    if (!userId) {
       return NextResponse.json(
-        { message: "Failed to fetch cart items" },
-        { status: 500 }
+        { message: "User ID is required" },
+        { status: 400 }
       );
     }
+
+    // Ambil item dari cart untuk user yang diberikan
+    const cartItems = await prisma.cart.findMany({
+      where: { userId: Number(userId) }, // Pastikan sesuai skema
+      include: {
+        product: true, // Termasuk detail produk jika ada relasi
+      },
+    });
+
+    return NextResponse.json(cartItems, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return NextResponse.json(
+      { message: "Failed to fetch cart items" },
+      { status: 500 }
+    );
   }
+}
+
 // Handler untuk POST request (tambahkan item ke cart)
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     // Ambil token dari cookies
-    const cookies = req.cookies;
-    const tokenCookie = cookies.get('token'); // Pastikan nama cookie sesuai dengan yang digunakan
-    const token = tokenCookie ? tokenCookie.value : null; // Ambil nilai token dari objek cookie
-    console.log("Token:", token); // Log untuk memverifikasi token yang diambil
+    const tokenCookie = req.cookies.get('token');
+    const token = tokenCookie?.value || null;
 
-    const decodedToken = await verifyToken(token); // Pastikan untuk menunggu hasil verifikasi
-    console.log("Decoded Token:", decodedToken); // Log untuk melihat token yang terdekode
+    if (!token) {
+      console.error("No token found in cookies");
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const decodedToken = await verifyToken(token);
 
     if (!decodedToken) {
       console.error("Invalid token");
       return NextResponse.json({ message: "Invalid token" }, { status: 401 });
     }
 
-    // Ambil data dari request body
-    const { productId, quantity } = await req.json();
-    const userId = decodedToken.id; // Ambil userId dari decoded token
+    const { productId, quantity }: { productId: number, quantity: number } = await req.json();
+    const userId = decodedToken.id as number;
 
     // Periksa apakah item sudah ada di keranjang
     const existingCartItem = await prisma.cart.findFirst({
@@ -86,7 +89,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error adding product to cart:", error);
     return NextResponse.json(
-      { message: "Failed to add product to cart", error: error.message },
+      { message: "Failed to add product to cart", error: (error as Error).message },
       { status: 500 }
     );
   }

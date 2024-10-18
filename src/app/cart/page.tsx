@@ -91,7 +91,7 @@ const ShoppingBag = () => {
           <div className="bg-white p-8 rounded-3xl shadow text-center">
             <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-4">
-              Looks like you haven't added any items to your cart yet.
+              Looks like you havent added any items to your cart yet.
             </p>
           </div>
         </div>
@@ -103,7 +103,7 @@ const ShoppingBag = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className="py-10 px-28 bg-gray-100">
+      <div className="py-10 px-5 py:px-28 bg-gray-100">
         <h1 className="text-2xl font-bold mb-2">Shopping Bag</h1>
         <p className="mb-4">
           <span className="text-slate-900 font-bold">{items.length} items</span>{" "}
