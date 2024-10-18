@@ -40,7 +40,7 @@ export default function Login() {
             console.log("Token saved:", data.token);
             setTimeout(() => {
               router.push("/");
-            }, 3000);
+            }, 1000);
             setError("");
             setIslogin("LOGIN BERHASIL");
           } else {
