@@ -93,20 +93,28 @@ export default function Navbar() {
           <Link href="/cart">
             <CiShoppingCart />
           </Link>
-          <Popover>
+         <Popover>
             <PopoverTrigger>
               <CiUser />
             </PopoverTrigger>
             <PopoverContent className="flex flex-col w-28 gap-5">
               {login ? (
-                <Button variant={"ghost"} onClick={handleLogout}>
-                  LOGOUT
-                </Button>
+                <>
+                  <Link href="/profile" className="text-center hover:text-blue-600">
+                    PROFILE
+                  </Link>
+                  <Button variant={"ghost"} onClick={handleLogout}>
+                    LOGOUT
+                  </Button>
+                </>
               ) : (
-                <Link href="/login">LOGIN</Link>
+                <Link href="/login" className="text-center hover:text-blue-600">
+                  LOGIN
+                </Link>
               )}
             </PopoverContent>
           </Popover>
+
         </div>
         <div className="md:hidden hover:cursor-pointer">
           <RxHamburgerMenu onClick={openModal} />

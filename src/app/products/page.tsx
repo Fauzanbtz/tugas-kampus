@@ -55,7 +55,7 @@ export default function Products() {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-wrap justify-center items-center gap-6 py-24">
+      <div className="flex flex-wrap justify-center items-center gap-6 py-24" href="/detail?id={item.id}">
         {loading
           ? Array.from({ length: 10 }).map((_, index) => (
               <div key={index} className="text-center">
@@ -66,6 +66,7 @@ export default function Products() {
             ))
           : datafetch.map((item) => (
               <div key={item.id} className="text-center">
+                <a href={`/products/detail?id=${item.id}`}>
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -76,6 +77,7 @@ export default function Products() {
                 <h1 className="font-serif text-2xl text-primary mt-4">
                   {item.name}
                 </h1>
+                </a>
                 <div className="flex justify-center gap-5 items-center">
                   <p className="text-lg mt-2">${item.price}</p>
                   <Button
@@ -97,6 +99,7 @@ export default function Products() {
                     Add to Cart
                   </Button>
                 </div>
+                
               </div>
             ))}
       </div>

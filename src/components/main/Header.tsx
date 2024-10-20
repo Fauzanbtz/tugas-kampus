@@ -57,9 +57,9 @@ export default function Header() {
             These cases are perfectly simple and easy to distinguish.
           </p>
 
-          <Button className="bg-[#f2b43b] w-fit text-primary">
+          <a className="bg-[#f2b43b] w-fit text-primary rounded py-2 px-2" href="/products">
             Start Shopping
-          </Button>
+          </a>
         </div>
         <div className="">
           <Image
