@@ -21,17 +21,18 @@ interface Product {
 }
 
 export default function ProductDetail() {
-  const [product, setProduct] = useState<Product | null>(null); // Tentukan tipe product
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
   const router = useRouter();
-  const productId = new URLSearchParams(window.location.search).get("id");
 
   useEffect(() => {
+    const productId = new URLSearchParams(window.location.search).get("id"); // Ambil productId di sini
+
     const fetchProduct = async () => {
       const response = await fetch(`/api/products/${productId}`);
       if (response.ok) {
-        const data: Product = await response.json(); // Tentukan tipe data dari API
+        const data: Product = await response.json();
         setProduct(data);
       } else {
         toast({
@@ -44,7 +45,7 @@ export default function ProductDetail() {
     };
 
     fetchProduct();
-  }, [productId, router, toast]);
+  }, [router, toast]);
 
   const handleAddToCart = async (productId: number) => {
     const token = Cookies.get("token");
@@ -92,7 +93,6 @@ export default function ProductDetail() {
     );
   }
 
-  // Pastikan product tidak null sebelum diakses
   if (!product) {
     return (
       <div>

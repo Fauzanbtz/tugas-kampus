@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-
 export function middleware(req: NextRequest) {
-
   const token = req.cookies.get("token");
 
   if (!token) {
@@ -14,5 +12,5 @@ export function middleware(req: NextRequest) {
 
 // Tentukan route yang memerlukan middleware
 export const config = {
-  matcher: ["/cart", "/profile"], // Halaman yang memerlukan autentikasi
+  matcher: ["/cart", "/profile", "/api/profile"], // Halaman dan API yang memerlukan autentikasi
 };
