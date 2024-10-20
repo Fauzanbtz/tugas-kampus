@@ -34,12 +34,7 @@ export default function Profile() {
         console.error("Error fetching profile:", error);
         toast({
           title: "Error",
-          description: "Failed to load user profile.",
-          action: (
-            <ToastAction altText="Retry" onClick={() => fetchProfile()}>
-              Retry
-            </ToastAction>
-          ),
+          description: "Failed to load user profile."
         });
       } finally {
         setLoading(false);

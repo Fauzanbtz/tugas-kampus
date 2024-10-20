@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import useFetch from "@/services/useFetch";
 import Navbar from "@/components/common/Navbar";
 import Image from "next/image";
 import Footer from "@/components/common/Footer";
@@ -11,8 +10,18 @@ import Cookies from "js-cookie";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
+// Tentukan tipe data produk
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image: string;
+}
+
 export default function ProductDetail() {
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<Product | null>(null); // Tentukan tipe product
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
   const router = useRouter();
@@ -22,7 +31,7 @@ export default function ProductDetail() {
     const fetchProduct = async () => {
       const response = await fetch(`/api/products/${productId}`);
       if (response.ok) {
-        const data = await response.json();
+        const data: Product = await response.json(); // Tentukan tipe data dari API
         setProduct(data);
       } else {
         toast({
@@ -37,21 +46,20 @@ export default function ProductDetail() {
     fetchProduct();
   }, [productId, router, toast]);
 
-   const handleAddToCart = async (productId: any) => {
+  const handleAddToCart = async (productId: number) => {
     const token = Cookies.get("token");
 
     try {
-
       if (!token) {
         router.push("/login");
-        throw new Error("Token tidak ditemukan, pastikan Anda sudah login."); 
+        throw new Error("Token tidak ditemukan, pastikan Anda sudah login.");
       }
 
       const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Menambahkan token ke header
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ productId, quantity: 1 }),
       });
@@ -64,14 +72,11 @@ export default function ProductDetail() {
       }
 
       const data = await response.json();
-      console.log(data); // Log data untuk memastikan respons dari server
+      console.log(data);
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
   };
-
-  
-
 
   if (loading) {
     return (
@@ -81,6 +86,19 @@ export default function ProductDetail() {
           <Skeleton className="h-[600px] w-[400px] rounded-xl" />
           <Skeleton className="h-6 w-[300px] mt-4" />
           <Skeleton className="h-6 w-[100px] mt-2" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Pastikan product tidak null sebelum diakses
+  if (!product) {
+    return (
+      <div>
+        <Navbar />
+        <div className="flex justify-center items-center py-24">
+          <p>Product not found</p>
         </div>
         <Footer />
       </div>
@@ -103,27 +121,27 @@ export default function ProductDetail() {
         </div>
         <div className="w-full justify-center">
           <h1 className="font-serif text-3xl text-primary">{product.name}</h1>
-          <p className="text-lg mt-4 "><b>Price:</b> ${product.price}</p>
+          <p className="text-lg mt-4"><b>Price:</b> ${product.price}</p>
           <p className="text-lg mt-2">Description: {product.description}</p>
           <p className="text-lg mt-2">Stock: {product.stock}</p>
           <Button
-                    className="bg-muted"
-                    onClick={async () => {
-                      try {
-                        await handleAddToCart(product.id); // Panggil fungsi addToCart
-                        toast({
-                          title: "Success!",
-                          description: "Item has been added to your cart.",
-                        });
-                      } catch {
-                        toast({
-                          title: "Uh oh! Something went wrong.",
-                          description: "There was a problem with your request.",
-                        });
-                      }
-                    }}>
-                    Add to Cart
-                  </Button>
+            className="bg-muted"
+            onClick={async () => {
+              try {
+                await handleAddToCart(product.id);
+                toast({
+                  title: "Success!",
+                  description: "Item has been added to your cart.",
+                });
+              } catch {
+                toast({
+                  title: "Uh oh! Something went wrong.",
+                  description: "There was a problem with your request.",
+                });
+              }
+            }}>
+            Add to Cart
+          </Button>
         </div>
       </div>
       <Footer />

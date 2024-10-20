@@ -55,7 +55,7 @@ export default function Products() {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-wrap justify-center items-center gap-6 py-24" href="/detail?id={item.id}">
+      <div className="flex flex-wrap justify-center items-center gap-6 py-24" >
         {loading
           ? Array.from({ length: 10 }).map((_, index) => (
               <div key={index} className="text-center">

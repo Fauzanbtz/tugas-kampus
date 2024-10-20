@@ -1,16 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma"; 
 import { verifyToken } from "@/lib/jwt";
+
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const tokenCookie = req.cookies.get('token');
-    const token = tokenCookie?.value || null;
+    const token = tokenCookie?.value || "";
+
+    // Verifikasi token
     const decodedToken = await verifyToken(token);
+
+    // Jika token tidak valid atau null
+    if (!decodedToken) {
+      return NextResponse.json({ message: "Invalid or missing token" }, { status: 401 });
+    }
+
+    // Pastikan decodedToken memiliki ID
     const userId = decodedToken.id as number;
-    console.log(userId);
 
     const userProfile = await prisma.user.findUnique({
-      where: { id: Number(userId) }, // Pastikan userId bisa di-convert ke Number
+      where: { id: Number(userId) },
     });
 
     if (!userProfile) {

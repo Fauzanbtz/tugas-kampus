@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 // import Image_Cover from "../../../public/images/cover_img.png"
 import Delivery from "../../../public/images/actor.png";
-import { Button } from "../ui/button";
 import { GiLeafSwirl } from "react-icons/gi";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 import { MdOutlineCleanHands } from "react-icons/md";
