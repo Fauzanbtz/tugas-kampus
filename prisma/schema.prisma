@@ -11,19 +11,31 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  // directUrl = env("DIRECT_URL")
-  shadowDatabaseUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
+  // shadowDatabaseUrl = env("DIRECT_URL")
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  email     String    @unique
   password  String
   role      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   Cart      Cart[]
+  addresses Address[] // Relasi ke model Address
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  street    String
+  city      String
+  state     String
+  postalCode String
+  country   String
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Product {
