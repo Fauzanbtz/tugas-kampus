@@ -23,6 +23,7 @@ const ShoppingBag = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const discount = 4.0;
 
+
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -128,6 +129,48 @@ const ShoppingBag = () => {
     );
   }
 
+  const checkoutItems = items.map(item => ({
+    product: {
+      name: item.product.name,
+      image: item.product.image,
+      price: item.product.price,
+    },
+    quantity: item.quantity,
+  }));
+
+  const handleCheckout = async () => {
+    if (checkoutItems.length === 0) {
+      console.warn('No items to checkout.');
+      return;
+    }
+  
+    setLoading(true);
+    try {
+      console.log("Items before checkout:", checkoutItems);
+      const response = await fetch('/api/checkoutsession', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: checkoutItems }),
+      });
+  
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("Failed to initiate checkout session:", error);
+        return;
+      }
+  
+      const data = await response.json();
+      window.location.href = data.url;
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
+  
+
   return (
     <Fragment>
       <Navbar />
@@ -217,8 +260,8 @@ const ShoppingBag = () => {
                   <span>Cart Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <button className="w-full bg-white text-black font-bold p-2 rounded-3xl mt-4 hover:bg-yellow-50 transition duration-200">
-                  Apply
+                <button onClick={handleCheckout} className="w-full bg-white text-black font-bold p-2 rounded-3xl mt-4 hover:bg-yellow-50 transition duration-200">
+                  Checkout
                 </button>
               </div>
             </div>
