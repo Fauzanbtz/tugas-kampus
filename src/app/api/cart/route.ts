@@ -39,7 +39,7 @@ export async function GET(req: Request): Promise<NextResponse> {
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     // Ambil token dari cookies
-    const tokenCookie = req.cookies.get('token');
+    const tokenCookie = req.cookies.get("token");
     const token = tokenCookie?.value || null;
 
     if (!token) {
@@ -54,7 +54,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ message: "Invalid token" }, { status: 401 });
     }
 
-    const { productId, quantity }: { productId: number, quantity: number } = await req.json();
+    const { productId, quantity }: { productId: number; quantity: number } =
+      await req.json();
     const userId = decodedToken.id as number;
 
     // Periksa apakah item sudah ada di keranjang
@@ -89,7 +90,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   } catch (error) {
     console.error("Error adding product to cart:", error);
     return NextResponse.json(
-      { message: "Failed to add product to cart", error: (error as Error).message },
+      {
+        message: "Failed to add product to cart",
+        error: (error as Error).message,
+      },
       { status: 500 }
     );
   }
@@ -101,7 +105,7 @@ export async function PATCH(req: NextRequest) {
 
     if (!id || quantity == null) {
       return NextResponse.json(
-        { message: 'Missing required fields' },
+        { message: "Missing required fields" },
         { status: 400 }
       );
     }
@@ -114,9 +118,31 @@ export async function PATCH(req: NextRequest) {
 
     return NextResponse.json(updatedCart, { status: 200 });
   } catch (error) {
-    console.error('Error updating cart item:', error);
+    console.error("Error updating cart item:", error);
     return NextResponse.json(
-      { message: 'Something went wrong' },
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const { id } = await req.json();
+
+    if (!id) {
+      return NextResponse.json({ message: "ID is required" }, { status: 400 });
+    }
+
+    const deleteCart = await prisma.cart.delete({
+      where: { id: id },
+    });
+
+    return NextResponse.json(deleteCart);
+  } catch (error) {
+    console.error("Error deleting cart item:", error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
       { status: 500 }
     );
   }

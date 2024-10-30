@@ -108,7 +108,7 @@ export default function ProductDetail() {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col md:flex-row justify-center items-start gap-12 py-24">
+      <div className="flex flex-col md:flex-row justify-center items-start gap-12 py-24 px-10">
         <div className="w-full md:w-1/2">
           <Image
             src={product.image}
@@ -119,13 +119,13 @@ export default function ProductDetail() {
             className="rounded-lg shadow-lg"
           />
         </div>
-        <div className="w-full justify-center">
-          <h1 className="font-serif text-3xl text-primary">{product.name}</h1>
+        <div className="w-full flex flex-col justify-center gap-3">
+          <h1 className="font-serif font-bold text-3xl text-primary">{product.name}</h1>
           <p className="text-lg mt-4"><b>Price:</b> ${product.price}</p>
           <p className="text-lg mt-2">Description: {product.description}</p>
           <p className="text-lg mt-2">Stock: {product.stock}</p>
           <Button
-            className="bg-muted"
+            className="bg-muted md:w-fit"
             onClick={async () => {
               try {
                 await handleAddToCart(product.id);
