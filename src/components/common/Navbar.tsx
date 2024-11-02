@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex justify-around items-center p-5">
+      <div className="flex justify-around items-center p-5 z-10">
         <h1 className="hidden md:flex text-primary font-bold text-xl">
           corkcicle.
         </h1>
@@ -93,14 +93,17 @@ export default function Navbar() {
           <Link href="/cart">
             <CiShoppingCart />
           </Link>
-         <Popover>
+          <Popover>
             <PopoverTrigger>
               <CiUser />
             </PopoverTrigger>
             <PopoverContent className="flex flex-col w-28 gap-5">
               {login ? (
                 <>
-                  <Link href="/profile" className="text-center hover:text-blue-600">
+                  <Link
+                    href="/profile"
+                    className="text-center hover:text-blue-600"
+                  >
                     PROFILE
                   </Link>
                   <Button variant={"ghost"} onClick={handleLogout}>
@@ -114,7 +117,6 @@ export default function Navbar() {
               )}
             </PopoverContent>
           </Popover>
-
         </div>
         <div className="md:hidden hover:cursor-pointer">
           <RxHamburgerMenu onClick={openModal} />
