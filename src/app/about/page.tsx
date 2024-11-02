@@ -107,6 +107,19 @@ export default function Component() {
                   <p className="text-muted-foreground">STAFF</p>
                 </div>
               </div>
+              <div className="flex flex-col items-center gap-3">
+                <Avatar className="w-20 h-20">
+                  <AvatarImage
+                    src="/placeholder-user.jpg"
+                    alt="Michael Johnson"
+                  />
+                  <AvatarFallback>AB</AvatarFallback>
+                </Avatar>
+                <div className="text-center">
+                  <h3 className="font-semibold">Niko</h3>
+                  <p className="text-muted-foreground">STAFF</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

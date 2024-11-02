@@ -12,5 +12,5 @@ export function middleware(req: NextRequest) {
 
 // Tentukan route yang memerlukan middleware
 export const config = {
-  matcher: ["/cart", "/profile", "/api/profile"], // Halaman dan API yang memerlukan autentikasi
+  matcher: ["/profile", "/api/profile"], // Halaman dan API yang memerlukan autentikasi
 };

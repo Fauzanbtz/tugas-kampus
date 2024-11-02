@@ -6,6 +6,10 @@ import Footer from "@/components/common/Footer";
 import Image from "next/image";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import { Button } from "@/components/ui/button";
+import { MdDelete } from "react-icons/md";
+import { TiMinus } from "react-icons/ti";
+import { FaPlus } from "react-icons/fa";
 
 interface CartItem {
   id: number;
@@ -23,10 +27,11 @@ const ShoppingBag = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const discount = 4.0;
 
+  const token = Cookies.get("token"); // Adjust as necessary
+
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const token = Cookies.get("token"); // Adjust as necessary
         if (!token) {
           console.error("No token found");
           setLoading(false);
@@ -128,6 +133,82 @@ const ShoppingBag = () => {
     );
   }
 
+  const checkoutItems = items.map((item) => ({
+    product: {
+      name: item.product.name,
+      image: item.product.image,
+      price: item.product.price,
+    },
+    quantity: item.quantity,
+  }));
+
+  const handleCheckout = async () => {
+    try {
+      console.log("Items before checkout:", checkoutItems);
+
+      const response = await fetch("/api/checkoutsession", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ items: checkoutItems }),
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("Failed to initiate checkout session:", error);
+        return;
+      }
+
+      const data = await response.json();
+      window.location.href = data.url;
+
+
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      // Decode user ID from token
+      const decoded: { id: number } = jwtDecode(token);
+      const userId = decoded.id;
+
+      // Delete all cart items after checkout
+      await fetch("/api/cart/deleteall", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+      });
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch("/api/cart", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error("Failed to delete cart item:", error);
+        return;
+      }
+
+      // Refresh halaman
+      window.location.reload();
+    } catch (error) {
+      console.error("Error during deletion:", error);
+    }
+  };
+
   return (
     <Fragment>
       <Navbar />
@@ -172,29 +253,34 @@ const ShoppingBag = () => {
                     </td>
                     <td className="text-center">
                       <div className="flex items-center justify-center">
-                        <button
+                        <Button
                           onClick={() => {
                             const newQuantity = item.quantity - 1;
                             if (newQuantity >= 1) {
                               updateCartQuantity(item.id, newQuantity);
                             }
                           }}
-                          className="border px-2 rounded-lg">
-                          -
-                        </button>
+                          className="border px-2  rounded-lg">
+                          <TiMinus/>
+                        </Button>
                         <span className="mx-2">{item.quantity}</span>
-                        <button
+                        <Button
                           onClick={() =>
                             updateCartQuantity(item.id, item.quantity + 1)
                           }
                           className="border px-2 rounded-lg">
-                          +
-                        </button>
+                          <FaPlus/>
+                        </Button>
                       </div>
                     </td>
 
                     <td className="text-center font-semibold">
                       ${(item.product.price * item.quantity).toFixed(2)}
+                    </td>
+                    <td>
+                      <Button onClick={() => handleDelete(item.id)}>
+                        <MdDelete />
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -217,9 +303,11 @@ const ShoppingBag = () => {
                   <span>Cart Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <button className="w-full bg-white text-black font-bold p-2 rounded-3xl mt-4 hover:bg-yellow-50 transition duration-200">
-                  Apply
-                </button>
+                <Button
+                  onClick={handleCheckout}
+                  className="w-full bg-white text-black font-bold p-2 rounded-3xl mt-4 hover:bg-yellow-50 transition duration-200">
+                  Checkout
+                </Button>
               </div>
             </div>
           </div>
