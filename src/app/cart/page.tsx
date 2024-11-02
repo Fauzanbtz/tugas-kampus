@@ -58,7 +58,7 @@ const ShoppingBag = () => {
     };
 
     fetchCartItems();
-  }, []);
+  }, [token]);
 
   // const updateQuantity = (id: number, newQuantity: number) => {
   //   setItems((prevItems) =>
