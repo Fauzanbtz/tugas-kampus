@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -57,10 +56,6 @@ const AddressCreateForm = ({ profileId }: { profileId: string }) => {
         <Card>
           <CardHeader>
             <CardTitle>Add Address</CardTitle>
-            <CardDescription>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-              dicta impedit esse.
-            </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <FormField

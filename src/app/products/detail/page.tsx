@@ -83,10 +83,12 @@ export default function ProductDetail() {
     return (
       <div>
         <Navbar />
-        <div className="flex justify-center items-center py-24">
+        <div className="flex justify-center gap-10 items-center py-24">
           <Skeleton className="h-[600px] w-[400px] rounded-xl" />
-          <Skeleton className="h-6 w-[300px] mt-4" />
-          <Skeleton className="h-6 w-[100px] mt-2" />
+          <div className="">
+            <Skeleton className="h-32 w-[300px]  mt-4" />
+            <Skeleton className="h-10 w-[100px] mt-2" />
+          </div>
         </div>
         <Footer />
       </div>
@@ -120,8 +122,12 @@ export default function ProductDetail() {
           />
         </div>
         <div className="w-full flex flex-col justify-center gap-3">
-          <h1 className="font-serif font-bold text-3xl text-primary">{product.name}</h1>
-          <p className="text-lg mt-4"><b>Price:</b> ${product.price}</p>
+          <h1 className="font-serif font-bold text-3xl text-primary">
+            {product.name}
+          </h1>
+          <p className="text-lg mt-4">
+            <b>Price:</b> ${product.price}
+          </p>
           <p className="text-lg mt-2">Description: {product.description}</p>
           <p className="text-lg mt-2">Stock: {product.stock}</p>
           <Button

@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -50,6 +49,7 @@ const AddressUpdateForm = ({ profileId }: { profileId: string }) => {
     state: address?.state,
     street: address?.street,
   };
+  console.log(address)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,10 +58,11 @@ const AddressUpdateForm = ({ profileId }: { profileId: string }) => {
 
   const mutatioonUpdateUserAddress = useUpdateData({
     queryKey: "profileData",
-    dataProtected: `/api/address/${address.id}`,
+    dataProtected: address ? `/api/address/${address.id}` : "",
     backUrl: `/profile`,
     multipart: false,
   });
+  
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     mutatioonUpdateUserAddress.mutate(values);
@@ -74,10 +75,6 @@ const AddressUpdateForm = ({ profileId }: { profileId: string }) => {
         <Card>
           <CardHeader>
             <CardTitle>Edit Address</CardTitle>
-            <CardDescription>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-              dicta impedit esse.
-            </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <FormField
@@ -159,7 +156,9 @@ const AddressUpdateForm = ({ profileId }: { profileId: string }) => {
         </Card>
       </form>
     </Form>
+    
   );
+  
 };
 
 export default AddressUpdateForm;

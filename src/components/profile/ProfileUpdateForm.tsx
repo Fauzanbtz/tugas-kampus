@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -71,10 +70,6 @@ const ProfileUpdateForm = () => {
         <Card className="">
           <CardHeader>
             <CardTitle>Edit Profile</CardTitle>
-            <CardDescription>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Doloremque quibusdam quaerat eaque.
-            </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-5">
             <FormField

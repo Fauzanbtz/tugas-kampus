@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { PiThermometerColdLight } from "react-icons/pi";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function Majesty() {
   return (
@@ -25,7 +25,7 @@ export default function Majesty() {
           <PiThermometerColdLight className="text-muted text-3xl" />{" "}
           <p className="text-primary text-xl">Cold for 14hrs</p>
         </div>
-        <Button className="w-fit px-10 bg-muted text-primary">$10.000USD View Detail</Button>
+        <Link href="/products" className="w-fit px-10 bg-muted text-primary p-2 rounded-md" >$10.000 USD View Detail</Link>
       </div>
       <div className="pt-10 md:pt-0">
         <Image
