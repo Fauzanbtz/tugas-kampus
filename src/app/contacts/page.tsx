@@ -14,11 +14,11 @@ export default function Contacts() {
   return (
     <div>
       <Navbar />
-      <div className="md:flex justify-between p-10 px-5 pt-10 md:px-24 items-center">
+      <div className="md:flex justify-between p-10 px-5 pt-10 md:px-24 items-center font-serif">
         <div className="md:w-1/2 flex flex-col gap-3">
           <div>
             <h1 className="text-3xl font-semibold">Get in touch</h1>
-            <p className="font-medium text-lg">
+            <p className="font-light text-lg text-muted-foreground max-w-xl">
               we're here for you every step of the way. whether you have
               questions, need order assistance, or whant to share feedback, our
               friendly customer support team is ready to assist. our team is

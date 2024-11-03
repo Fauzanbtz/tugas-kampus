@@ -9,6 +9,7 @@ import Cookies from "js-cookie"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Trash2, Minus, Plus, ShoppingBag } from "lucide-react"
+import Link from "next/link"
 
 interface CartItem {
   id: number
@@ -187,9 +188,9 @@ export default function Component() {
             <p className="text-gray-600 mb-6">
               Looks like you haven&rsquo;t added any items to your cart yet.
             </p>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Link href="/products" className="bg-primary p-2 rounded-md text-primary-foreground hover:bg-primary/90">
               Start Shopping
-            </Button>
+            </Link>
           </div>
         </div>
         <Footer />

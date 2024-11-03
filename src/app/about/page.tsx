@@ -1,37 +1,37 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
+import Image from "next/image";
 
 export default function Component() {
   return (
-    <div className="w-full">
+    <div className="w-full font-serif">
       <Navbar />
-      <section className="bg-primary text-white py-12 md:py-24">
+      <section className="bg-primary text-white py-12 md:py-24 ">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
-            <h1 className="text-3xl md:text-4xl font-bold">Tentang Kami</h1>
-            <p className=" text-lg md:text-xl">
-              Kami adalah perusahaan e-commerce yang berkomitmen untuk
-              menyediakan pengalaman belanja online yang luar biasa bagi
-              pelanggan kami. Dengan visi untuk menjadi platform terkemuka di
-              industri ini, kami terus berinovasi dan mengembangkan solusi yang
-              memudahkan hidup Anda.
+            <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
+            <p className="text-lg md:text-xl text-gray-400">
+              We are an e-commerce company committed to providing a great online
+              shopping experience for our customers. With a vision to become the
+              leading platform in this industry, we continue to innovate and
+              develop solutions to make your life easier.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Visi</h2>
-              <p className="">
-                Menjadi platform e-commerce terpercaya yang menyediakan
-                produk-produk berkualitas dan layanan terbaik bagi pelanggan.
+              <h2 className="text-2xl font-bold">Vision</h2>
+              <p className="text-gray-400">
+                To become a trusted e-commerce platform providing quality
+                products and the best services for our customers.
               </p>
             </div>
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold">Misi</h2>
-              <p className="">
-                Kami bertekad untuk terus berinovasi, memperluas jangkauan, dan
-                memberikan pengalaman belanja online yang menyenangkan bagi
-                semua orang.
+              <h2 className="text-2xl font-bold">Mission</h2>
+              <p className="text-gray-400">
+                We are committed to continuous innovation, expanding our reach,
+                and providing an enjoyable online shopping experience for
+                everyone.
               </p>
             </div>
           </div>
@@ -41,17 +41,24 @@ export default function Component() {
         <div className="container px-4 md:px-6 max-w-4xl mx-auto">
           <div className="grid gap-8">
             <div className="text-center space-y-3">
-              <h2 className="text-2xl md:text-3xl font-bold">Tim Kami</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Our Team</h2>
               <p className="text-muted-foreground text-lg md:text-xl">
-                Kami adalah sekelompok profesional yang berdedikasi untuk
-                memberikan yang terbaik bagi pelanggan kami.
+                We are a group of professionals dedicated to providing the best
+                for our customers.
               </p>
             </div>
             <div className="flex flex-wrap justify-around">
               <div className="flex flex-col items-center gap-3">
                 <Avatar className="w-20 h-20">
                   <AvatarImage src="/placeholder-user.jpg" alt="John Doe" />
-                  <AvatarFallback>MF</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/736x/30/98/f2/3098f2d8ba66fe67b46d4558b98882ab.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Fauzan</h3>
@@ -61,11 +68,18 @@ export default function Component() {
               <div className="flex flex-col items-center gap-3">
                 <Avatar className="w-20 h-20">
                   <AvatarImage src="/placeholder-user.jpg" alt="Jane Smith" />
-                  <AvatarFallback>AR</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/564x/6b/0b/3b/6b0b3b273446db32253cc0b259ffe4aa.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Arkhan</h3>
-                  <p className="text-muted-foreground">BABU</p>
+                  <p className="text-muted-foreground">Staff</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
@@ -74,11 +88,18 @@ export default function Component() {
                     src="/placeholder-user.jpg"
                     alt="Michael Johnson"
                   />
-                  <AvatarFallback>KH</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/564x/e7/32/8d/e7328dda453fab5ce0047ff67d0f9937.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Khanif</h3>
-                  <p className="text-muted-foreground">PEMBANTU</p>
+                  <p className="text-muted-foreground">Assistant</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
@@ -87,11 +108,18 @@ export default function Component() {
                     src="/placeholder-user.jpg"
                     alt="Michael Johnson"
                   />
-                  <AvatarFallback>TM</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/564x/5c/3b/1e/5c3b1efd6254eef86fa89116edec4c64.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Tami</h3>
-                  <p className="text-muted-foreground">PENADAH</p>
+                  <p className="text-muted-foreground">Supplier</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
@@ -100,11 +128,18 @@ export default function Component() {
                     src="/placeholder-user.jpg"
                     alt="Michael Johnson"
                   />
-                  <AvatarFallback>AB</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/564x/07/12/43/0712433a8806c63e1574606bcae263c3.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Abay</h3>
-                  <p className="text-muted-foreground">STAFF</p>
+                  <p className="text-muted-foreground">Staff</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3">
@@ -113,11 +148,18 @@ export default function Component() {
                     src="/placeholder-user.jpg"
                     alt="Michael Johnson"
                   />
-                  <AvatarFallback>AB</AvatarFallback>
+                  <AvatarFallback>
+                    <Image
+                      src="https://i.pinimg.com/564x/46/6b/c2/466bc236c0ec8163db8df0e7d21e0359.jpg"
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-center">
                   <h3 className="font-semibold">Niko</h3>
-                  <p className="text-muted-foreground">STAFF</p>
+                  <p className="text-muted-foreground">Staff</p>
                 </div>
               </div>
             </div>
@@ -127,41 +169,41 @@ export default function Component() {
       <section className="bg-gray-300 py-12 md:py-24">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold">Proses Bisnis</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Our Business Process
+            </h2>
             <p className="text-muted-foreground text-lg md:text-xl">
-              Kami memiliki proses bisnis yang efisien dan transparan untuk
-              memberikan pengalaman belanja yang luar biasa bagi pelanggan.
+              We have an efficient and transparent business process to provide
+              an exceptional shopping experience for our customers.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Pemesanan</h3>
+              <h3 className="text-xl font-bold">Ordering</h3>
               <p className="text-muted-foreground">
-                Pelanggan dapat dengan mudah memesan produk melalui platform
-                kami yang user-friendly. Kami memastikan proses pemesanan yang
-                cepat dan aman.
+                Customers can easily place orders through our user-friendly
+                platform. We ensure a fast and secure ordering process.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Pengiriman</h3>
+              <h3 className="text-xl font-bold">Shipping</h3>
               <p className="text-muted-foreground">
-                Kami bekerja sama dengan mitra logistik terpercaya untuk
-                memastikan pengiriman yang cepat dan aman ke seluruh Indonesia.
+                We collaborate with trusted logistics partners to ensure quick
+                and safe delivery across the country.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Layanan Pelanggan</h3>
+              <h3 className="text-xl font-bold">Customer Service</h3>
               <p className="text-muted-foreground">
-                Tim kami yang berpengalaman siap membantu Anda kapan pun Anda
-                membutuhkan. Kami berkomitmen untuk memberikan layanan terbaik.
+                Our experienced team is ready to assist you whenever you need
+                it. We are committed to providing excellent service.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Pengembalian</h3>
+              <h3 className="text-xl font-bold">Returns</h3>
               <p className="text-muted-foreground">
-                Kami memahami bahwa kadang-kadang produk tidak sesuai dengan
-                harapan. Oleh karena itu, kami menyediakan proses pengembalian
-                yang mudah dan cepat.
+                We understand that sometimes products may not meet expectations.
+                Therefore, we offer a quick and easy return process.
               </p>
             </div>
           </div>
@@ -170,45 +212,45 @@ export default function Component() {
       <section className="py-12 md:py-24">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto grid gap-8">
           <div className="text-center space-y-3">
-            <h2 className="text-2xl md:text-3xl font-bold">Nilai-Nilai Kami</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">Our Values</h2>
             <p className="text-muted-foreground text-lg md:text-xl">
-              Nilai-nilai kami menjadi landasan dalam setiap keputusan dan
-              tindakan kami.
+              Our values are the foundation of every decision and action we
+              take.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Integritas</h3>
+              <h3 className="text-xl font-bold">Integrity</h3>
               <p className="text-muted-foreground">
-                Kami berkomitmen untuk selalu bersikap jujur, etis, dan
-                transparan dalam setiap interaksi dengan pelanggan.
+                We are committed to being honest, ethical, and transparent in
+                every interaction with our customers.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Inovasi</h3>
+              <h3 className="text-xl font-bold">Innovation</h3>
               <p className="text-muted-foreground">
-                Kami terus berinovasi untuk mengembangkan solusi yang lebih baik
-                dan memberikan pengalaman belanja yang lebih menyenangkan.
+                We continuously innovate to develop better solutions and deliver
+                a more enjoyable shopping experience.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Kepuasan Pelanggan</h3>
+              <h3 className="text-xl font-bold">Customer Satisfaction</h3>
               <p className="text-muted-foreground">
-                Kepuasan pelanggan adalah prioritas utama kami. Kami berusaha
-                keras untuk memenuhi kebutuhan dan harapan mereka.
+                Customer satisfaction is our top priority. We strive to meet
+                their needs and exceed their expectations.
               </p>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-bold">Tanggung Jawab Sosial</h3>
+              <h3 className="text-xl font-bold">Social Responsibility</h3>
               <p className="text-muted-foreground">
-                Kami berkomitmen untuk menjalankan bisnis kami dengan cara yang
-                bertanggung jawab secara sosial dan lingkungan.
+                We are committed to conducting our business in a socially and
+                environmentally responsible manner.
               </p>
             </div>
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
