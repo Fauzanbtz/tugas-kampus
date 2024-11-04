@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex justify-around items-center p-5 z-10 font-serif">
+      <div className="absolute top-0 left-0 w-full flex justify-around items-center p-5 bg-white shadow-md z-50 font-serif">
         <h1 className="hidden md:flex text-primary font-bold text-xl">
           Corkcicle-Sport.
         </h1>
@@ -73,10 +73,12 @@ export default function Navbar() {
         <div
           className={`flex flex-col duration-200 ${
             modal ? "left-0" : "-left-full"
-          } top-0 absolute bg-white p-10 h-full w-2/3`}
+          } top-0 fixed bg-white p-10 h-full w-2/3 z-40`}
         >
-          <div className="flex justify-between ">
-            <h1 className="pb-10 text-primary font-bold text-xl">Corkcicle-Sport.</h1>
+          <div className="flex justify-between">
+            <h1 className="pb-10 text-primary font-bold text-xl">
+              Corkcicle-Sport.
+            </h1>
             <IoCloseOutline
               className="text-2xl hover:cursor-pointer"
               onClick={() => setModal(false)}
@@ -122,7 +124,9 @@ export default function Navbar() {
           <RxHamburgerMenu onClick={openModal} />
         </div>
       </div>
-      <Toaster />
+      <div className="pt-10"> {/* Memberikan padding top untuk konten utama */}
+        <Toaster />
+      </div>
     </>
   );
 }
