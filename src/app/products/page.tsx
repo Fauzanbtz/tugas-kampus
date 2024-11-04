@@ -73,6 +73,7 @@ export default function Products() {
                       width={400}
                       height={400}
                       priority
+                      className="bg-[#F3F3F3] rounded-md"
                     />
                     <h1 className="font-serif text-2xl text-primary mt-4">
                       {item.name}

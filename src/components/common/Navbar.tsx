@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex justify-around items-center p-5 z-10">
+      <div className="flex justify-around items-center p-5 z-10 font-serif">
         <h1 className="hidden md:flex text-primary font-bold text-xl">
           Corkcicle-Sport.
         </h1>

@@ -14,9 +14,8 @@ export default function Majesty() {
             <br /> majesty
           </h1>
           <p className="text-xl">
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi.
+            Make your drinking style cooler with a corkcicle which can maintain
+            the hygiene and freshness of your drink.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -25,7 +24,11 @@ export default function Majesty() {
           <PiThermometerColdLight className="text-muted text-3xl" />{" "}
           <p className="text-primary text-xl">Cold for 14hrs</p>
         </div>
-        <Link href="/products" className="w-fit px-10 bg-muted text-primary p-2 rounded-md" >$10.000 USD View Detail</Link>
+        <Link
+          href="/products"
+          className="w-fit px-10 bg-muted text-primary p-2 rounded-md">
+          $10.000 USD View Detail
+        </Link>
       </div>
       <div className="pt-10 md:pt-0">
         <Image

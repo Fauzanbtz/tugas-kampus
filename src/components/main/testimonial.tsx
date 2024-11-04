@@ -5,32 +5,32 @@ import Image from "next/image";
 const reviews = [
   {
     name: "Fauzan",
-    username: "@FauzanGanteng",
-    body: "gajah terbang keliatan apanya ?",
-    img: "https://i.pinimg.com/564x/42/1e/1d/421e1dd6be652135be6e6a3be6b53ddb.jpg",
+    username: "Incredible for staying hydrated!",
+    body: "My Corkcicle bottle keeps my water ice-cold all day. It's ideal for intense workouts and hot days—truly a must-have!",
+    img: "https://i.pinimg.com/564x/0d/b8/9e/0db89e4f5b087b2693e663bf96f01335.jpg",
   },
   {
     name: "Khanif",
-    username: "@Khanifpah",
-    body: "dua tiga tutup botol, ini website cakep betooool",
+    username: "Stylish and practical.",
+    body: "This bottle combines great design with real functionality. It’s super sturdy, leak-proof, and looks amazing wherever I take it.",
     img: "https://i.pinimg.com/564x/8a/1a/35/8a1a35d348d66b122d202c556eb2da25.jpg",
   },
   {
     name: "Arkhan",
-    username: "@ArkhanSadboy",
-    body: "pliss dapet nilai tinggi",
+    username: "Perfect for active lifestyles.",
+    body: "Keeps my drinks fresh and cold during long days out. The sleek design and insulation make it a top choice for me.",
     img: "https://i.pinimg.com/564x/bc/b8/b0/bcb8b04bf6708aebd78dfe9167991838.jpg",
   },
   {
     name: "Tami",
-    username: "@Tamiah",
-    body: "dimana ada event cosplay, disitu ada saya",
+    username: "So convenient and easy to use.",
+    body: "The handle makes it simple to carry, and it’s easy to clean. Great for anyone with an on-the-go lifestyle.",
     img: "https://i.pinimg.com/564x/5b/59/44/5b594416a4a9834caeea04173c43a71d.jpg",
   },
   {
     name: "Abay",
-    username: "@AbaySleeping",
-    body: "ngantuk banget deh",
+    username: "Fantastic quality and eco-conscious.",
+    body: "Love that it’s reusable and built to last. Keeps my drinks at just the right temperature, and it’s worth every penny!",
     img: "https://i.pinimg.com/enabled_hi/564x/16/08/a0/1608a083d706ad0673147101e70b22dd.jpg",
   },
 ];
@@ -52,7 +52,7 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "relative w-80 cursor-pointer overflow-hidden rounded-xl border p-4",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
@@ -60,9 +60,9 @@ const ReviewCard = ({
       )}>
       <div className="flex flex-row items-center gap-2">
         <Image
-          className="rounded-full object-fill w-8 h-8"
-          width={32}
-          height={32}
+          className="rounded-full object-fill w-10 h-10"
+          width={100}
+          height={100}
           alt=""
           src={img}
         />
@@ -73,17 +73,17 @@ const ReviewCard = ({
           <p className="text-xs font-medium dark:text-white/40">{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+      <blockquote className="mt-2 text-">&quot;{body}&quot;</blockquote>
     </figure>
   );
 };
 
 export function Testimonial() {
   return (
-    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+    <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
+          <ReviewCard key={review.username} {...review}/>
         ))}
       </Marquee>
       <Marquee reverse pauseOnHover className="[--duration:20s]">
